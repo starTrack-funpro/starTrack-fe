@@ -1,4 +1,4 @@
-# starTrack - Backend
+# starTrack - Frontend
 
 Part of Functional Programming Odd Semester 2023/2024 Final Project
 
