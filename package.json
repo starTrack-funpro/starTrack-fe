@@ -11,14 +11,14 @@
     "check-format": "prettier --check .",
     "check-lint": "eslint . --ext ts --ext tsx --ext js",
     "format": "prettier --write .",
-    "test-all": "yarn format && yarn check-format && yarn check-lint && yarn check-types",
-    "prepare": "husky install"
+    "test-all": "yarn format && yarn check-format && yarn check-lint && yarn check-types"
   },
   "dependencies": {
+    "axios": "^1.6.1",
     "next": "14.0.1",
-    "next-stride": "^2.6.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-hot-toast": "^2.4.1"
   },
   "devDependencies": {
     "@tsconfig/next": "^2.0.1",
@@ -33,7 +33,7 @@
     "eslint-config-next": "14.0.1",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-react": "^7.33.2",
-    "husky": "^8.0.0",
+    "next-stride": "^2.6.4",
     "postcss": "^8",
     "prettier": "^3.0.3",
     "tailwindcss": "^3.3.0",
