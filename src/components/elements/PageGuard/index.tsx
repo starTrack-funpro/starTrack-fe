@@ -10,7 +10,6 @@ export const PageGuard: React.FC<PageGuardInterface> = ({ children }) => {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      console.log('HEHE')
       toast.error('Please login first')
       router.push('/login')
     }
