@@ -1,6 +1,8 @@
 'use client'
 
+import { useAuthContext } from '@contexts'
 import { useApi } from '@hooks'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 
@@ -8,6 +10,8 @@ export const LoginModule = () => {
   const [inputUsername, setInputUsername] = useState<string>('')
   const [inputPassword, setInputPassword] = useState<string>('')
   const { loading, api } = useApi()
+  const { refresh } = useAuthContext()
+  const router = useRouter()
 
   const handleLogin = async () => {
     if (!inputUsername || !inputPassword) {
@@ -23,6 +27,8 @@ export const LoginModule = () => {
 
     if (!error) {
       toast.success('Successfully logged in')
+      router.push('/')
+      refresh()
     } else {
       toast.error('Sorry! Something went wrong')
     }

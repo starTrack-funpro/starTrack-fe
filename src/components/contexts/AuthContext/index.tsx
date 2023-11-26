@@ -15,7 +15,7 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   const [name, setName] = useState('')
 
   const fetchAuthenticated = async () => {
-    const { response, error } = await api.get('/auth/protected')
+    const { response } = await api.get('/auth/protected')
 
     if (response) {
       setIsAuthenticated(true)
@@ -36,6 +36,7 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
     isAuthenticated,
     username,
     name,
+    refresh: fetchAuthenticated,
   }
 
   return (
