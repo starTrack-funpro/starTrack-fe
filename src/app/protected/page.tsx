@@ -1,15 +1,17 @@
 'use client'
 
 import { useAuthContext } from '@contexts'
-import { PageGuard } from '@elements'
+import { usePageGuard } from '@hooks'
 
 export default function ProtectedPage() {
+  usePageGuard()
+
   const { isAuthenticated, name } = useAuthContext()
 
   return (
-    <PageGuard>
+    <>
       <span>THIS IS PROTECTED</span>
       {isAuthenticated && <span>HELLO {name}</span>}
-    </PageGuard>
+    </>
   )
 }

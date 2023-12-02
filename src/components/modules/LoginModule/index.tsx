@@ -30,7 +30,12 @@ export const LoginModule = () => {
       router.push('/')
       refresh()
     } else {
-      toast.error('Sorry! Something went wrong')
+      const message = error.response.data.message
+      if (message === 'Password incorrect' || message === 'User not found') {
+        toast.error('Incorrect username or password')
+      } else {
+        toast.error('Sorry! Something went wrong')
+      }
     }
   }
 
