@@ -34,7 +34,7 @@ export const SignUpModule = () => {
   }
 
   return (
-    <div className="flex flex-col min-h-screen items-center justify-center gap-8">
+    <div className="flex flex-col items-center justify-center gap-8 pt-40">
       <h1 className="text-4xl font-bold">Sign Up</h1>
 
       <div className="w-1/4 flex flex-col items-center gap-6">

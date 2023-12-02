@@ -22,7 +22,7 @@ export const Navbar = () => {
   }
 
   return (
-    <div className="w-full flex bg-black absolute">
+    <div className="w-full flex bg-black">
       <div className="w-full flex px-8 py-6 gap-12 items-center">
         <Link href="/">
           <h1 className="text-5xl font-bold bg-gradient-to-r from-white to-folly text-transparent bg-clip-text">
@@ -33,7 +33,9 @@ export const Navbar = () => {
         <div className="w-full flex justify-between">
           <nav className="flex items-center">
             <ul className="flex gap-6">
-              <li className="text-2xl font-semibold">Series</li>
+              <Link href="/series">
+                <li className="text-2xl font-semibold">Series</li>
+              </Link>
               {isAuthenticated && (
                 <li className="text-2xl font-semibold">Dashboard</li>
               )}
