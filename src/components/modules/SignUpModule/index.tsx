@@ -1,5 +1,6 @@
 'use client'
 
+import { Button } from '@elements'
 import { useApi } from '@hooks'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -68,13 +69,7 @@ export const SignUpModule = () => {
       </div>
 
       <div className="flex flex-col items-center gap-2">
-        <button
-          className="bg-folly px-6 py-2 rounded-xl"
-          onClick={handleLogin}
-          disabled={loading}
-        >
-          Sign Up
-        </button>
+        <Button>Sign Up</Button>
 
         <div className="flex gap-2">
           <span className="">Already have an account?</span>

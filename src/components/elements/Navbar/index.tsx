@@ -3,6 +3,7 @@ import { useApi } from '@hooks'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
+import { Button } from '../Button'
 
 export const Navbar = () => {
   const { isAuthenticated, name, refresh } = useAuthContext()
@@ -45,14 +46,10 @@ export const Navbar = () => {
           {!isAuthenticated && (
             <div>
               <Link href="/login">
-                <button className="rounded-xl bg-folly px-4 py-2 font-semibold">
-                  Login
-                </button>
+                <Button>Login</Button>
               </Link>
               <Link href="/signup">
-                <button className="rounded-xl px-4 py-2 font-semibold">
-                  Sign Up
-                </button>
+                <Button variant="transparent">Sign Up</Button>
               </Link>
             </div>
           )}
@@ -60,13 +57,9 @@ export const Navbar = () => {
           {isAuthenticated && (
             <div className="flex gap-4 justify-center items-center">
               <span>Hi, {name}</span>
-              <button
-                className="rounded-xl bg-folly px-4 py-2 font-semibold"
-                disabled={loading}
-                onClick={handleLogout}
-              >
+              <Button disabled={loading} onClick={handleLogout}>
                 Logout
-              </button>
+              </Button>
             </div>
           )}
         </div>
