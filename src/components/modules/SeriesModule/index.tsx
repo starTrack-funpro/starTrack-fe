@@ -1,6 +1,6 @@
 'use client'
 
-import { SeriesCard } from '@elements'
+import { Radio, SeriesCard } from '@elements'
 import { useApi } from '@hooks'
 import { useEffect, useState } from 'react'
 import { Series } from 'src/components/elements/SeriesCard/interface'
@@ -10,15 +10,18 @@ export const SeriesModule = () => {
   const { api } = useApi()
   const [series, setSeries] = useState<Series[]>([])
   const [searchTitle, setSearchTitle] = useState('')
+  const [selectedType, setSelectedType] = useState('')
 
   const fetchSeries = async () => {
-    const { response } = await api.get(`/series?title=${searchTitle}&type=`)
+    const { response } = await api.get(
+      `/series?title=${searchTitle}&type=${selectedType}`
+    )
     setSeries(response.data)
   }
 
   useEffect(() => {
     fetchSeries()
-  }, [searchTitle])
+  }, [searchTitle, selectedType])
 
   const debouncedSearch = useDebouncedCallback((value) => {
     setSearchTitle(value)
@@ -26,7 +29,46 @@ export const SeriesModule = () => {
 
   return (
     <div className="flex px-12">
-      <section className="w-1/5"></section>
+      <section className="w-1/5 flex flex-col">
+        <span className="pt-16 font-semibold">Filter by Type</span>
+        <div className="flex flex-col pl-6 py-2">
+          <Radio
+            value=""
+            currentValue={selectedType}
+            name="type-filter"
+            onChange={() => setSelectedType('')}
+            label="All"
+          />
+          <Radio
+            value="Film"
+            currentValue={selectedType}
+            name="type-filter"
+            onChange={() => setSelectedType('Film')}
+            label="Film"
+          />
+          <Radio
+            value="TVSeries"
+            currentValue={selectedType}
+            name="type-filter"
+            onChange={() => setSelectedType('TVSeries')}
+            label="TV Series"
+          />
+          <Radio
+            value="Novel"
+            currentValue={selectedType}
+            name="type-filter"
+            onChange={() => setSelectedType('Novel')}
+            label="Novel"
+          />
+          <Radio
+            value="Comic"
+            currentValue={selectedType}
+            name="type-filter"
+            onChange={() => setSelectedType('Comic')}
+            label="Comic"
+          />
+        </div>
+      </section>
       <section className="w-full flex flex-col gap-6">
         <div className="w-full flex">
           <input
