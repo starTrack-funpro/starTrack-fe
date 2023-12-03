@@ -5,9 +5,10 @@ import { useApi } from '@hooks'
 import { useEffect, useState } from 'react'
 import { Series } from 'src/components/elements/SeriesCard/interface'
 import { useDebouncedCallback } from 'use-debounce'
+import { AiOutlineLoading } from 'react-icons/ai'
 
 export const SeriesModule = () => {
-  const { api } = useApi()
+  const { api, loading } = useApi()
   const [series, setSeries] = useState<Series[]>([])
   const [searchTitle, setSearchTitle] = useState('')
   const [selectedType, setSelectedType] = useState('')
@@ -79,9 +80,20 @@ export const SeriesModule = () => {
           />
         </div>
         <div className="flex flex-col gap-6">
+          {loading && (
+            <span className="flex items-center gap-2 place-self-center py-12 text-slate-400">
+              <AiOutlineLoading className="animate-spin" />
+              Finding series...
+            </span>
+          )}
           {series.map((value) => (
             <SeriesCard {...value} key={value.id} />
           ))}
+          {!loading && series.length === 0 && (
+            <span className=" place-self-center py-12 text-slate-400">
+              Sorry! No series available yet.
+            </span>
+          )}
         </div>
       </section>
     </div>
