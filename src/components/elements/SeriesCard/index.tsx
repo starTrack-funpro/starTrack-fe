@@ -10,7 +10,7 @@ export const SeriesCard: React.FC<Series> = ({
   seriesType,
 }) => {
   return (
-    <div className="flex rounded-2xl py-6 px-8 bg-white/10 gap-8">
+    <div className="flex rounded-2xl py-6 px-8 bg-white/10 gap-8 hover:cursor-pointer hover:scale-105 transition-all">
       <Image
         className="rounded-lg"
         src={imageUrl}
