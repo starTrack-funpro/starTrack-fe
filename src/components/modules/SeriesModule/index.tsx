@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import { Series } from 'src/components/elements/SeriesCard/interface'
 import { useDebouncedCallback } from 'use-debounce'
 import { AiOutlineLoading } from 'react-icons/ai'
+import Link from 'next/link'
 
 export const SeriesModule = () => {
   const { api, loading } = useApi()
@@ -87,7 +88,9 @@ export const SeriesModule = () => {
             </span>
           )}
           {series.map((value) => (
-            <SeriesCard {...value} key={value.id} />
+            <Link href={`/series/${value.id}`} key={value.id}>
+              <SeriesCard {...value} />
+            </Link>
           ))}
           {!loading && series.length === 0 && (
             <span className=" place-self-center py-12 text-slate-400">

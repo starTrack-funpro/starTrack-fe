@@ -18,7 +18,7 @@ export const SeriesCard: React.FC<Series> = ({
         width={92}
         height={200}
       />
-      <div className="flex flex-col h-full justify-between">
+      <div className="flex flex-col justify-between">
         <div className="flex flex-col gap-2">
           <span className="font-semibold text-xl">{title}</span>
           <span className="">{year}</span>
