@@ -8,6 +8,7 @@ import { useApi, useModal } from '@hooks'
 import Image from 'next/image'
 import {
   AddChapterModal,
+  AddEpisodeModal,
   Button,
   ChapterCard,
   Chips,
@@ -122,6 +123,13 @@ export const SeriesDetailModule: React.FC<SeriesDetailModuleProps> = ({
       </section>
       {isOpen && series && chapterOrEpisode() === 'Chapter' && (
         <AddChapterModal
+          seriesId={series.id}
+          close={closeModal}
+          onSave={fetchChaptersOrEpisodes}
+        />
+      )}
+      {isOpen && series && chapterOrEpisode() === 'Episode' && (
+        <AddEpisodeModal
           seriesId={series.id}
           close={closeModal}
           onSave={fetchChaptersOrEpisodes}
