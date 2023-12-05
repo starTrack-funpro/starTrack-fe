@@ -1,3 +1,4 @@
+import { durationToString } from '@utils'
 import { Button } from '../Button'
 import { Episode, EpisodeCardProps } from './interface'
 
@@ -20,9 +21,7 @@ export const EpisodeCard: React.FC<Episode & EpisodeCardProps> = ({
         <div className="flex items-center gap-4">
           {userEpisode && (
             <span>
-              Last watched: {userEpisode.lastWatchTime.hours}:
-              {userEpisode.lastWatchTime.minutes}:
-              {userEpisode.lastWatchTime.seconds}
+              Last watched: {durationToString(userEpisode.lastWatchTime)}
             </span>
           )}
           <Button onClick={onButtonClick}>

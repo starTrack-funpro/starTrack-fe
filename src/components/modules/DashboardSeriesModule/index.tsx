@@ -13,6 +13,7 @@ import {
   ChapterModal,
   Chips,
   EpisodeCard,
+  EpisodeModal,
   ProgressModal,
 } from '@elements'
 import Image from 'next/image'
@@ -24,9 +25,10 @@ export const DashboardSeriesModule: React.FC<DashboardSeriesModuleProps> = ({
   const [series, setSeries] = useState<Series>()
   const [chapters, setChapters] = useState<Chapter[]>([])
   const [episodes, setEpisodes] = useState<Episode[]>([])
+  const [selectedChapter, setSelectedChapter] = useState<Chapter>()
+  const [selectedEpisode, setSelectedEpisode] = useState<Episode>()
   const { isOpen, openModal, closeModal } = useModal()
   const { loading, api } = useApi()
-  const [selectedChapter, setSelectedChapter] = useState<Chapter>()
 
   const chapterMapper = (e: any) => {
     return {
@@ -74,6 +76,11 @@ export const DashboardSeriesModule: React.FC<DashboardSeriesModuleProps> = ({
 
   const prepareChapterModal = (chapter: Chapter) => {
     setSelectedChapter(chapter)
+    openModal()
+  }
+
+  const prepareEpisodeModal = (episode: Episode) => {
+    setSelectedEpisode(episode)
     openModal()
   }
 
@@ -136,7 +143,7 @@ export const DashboardSeriesModule: React.FC<DashboardSeriesModuleProps> = ({
                 {...value}
                 key={value.no}
                 withProgress
-                onButtonClick={openModal}
+                onButtonClick={() => prepareEpisodeModal(value)}
               />
             )
           })}
@@ -145,6 +152,13 @@ export const DashboardSeriesModule: React.FC<DashboardSeriesModuleProps> = ({
       {isOpen && selectedChapter && (
         <ChapterModal
           chapter={selectedChapter}
+          close={closeModal}
+          onSave={fetchSeries}
+        />
+      )}
+      {isOpen && selectedEpisode && (
+        <EpisodeModal
+          episode={selectedEpisode}
           close={closeModal}
           onSave={fetchSeries}
         />
