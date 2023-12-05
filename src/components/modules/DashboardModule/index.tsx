@@ -28,7 +28,7 @@ export const DashboardModule = () => {
       <Sidebar />
       <section className="w-full flex flex-col gap-6">
         {series.map((value) => (
-          <Link href={`/series/track/${value.id}`} key={value.id}>
+          <Link href={`/dashboard/series/${value.id}`} key={value.id}>
             <SeriesCard {...value} />
           </Link>
         ))}
