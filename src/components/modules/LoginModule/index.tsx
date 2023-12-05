@@ -72,7 +72,7 @@ export const LoginModule = () => {
 
         <div className="flex gap-2">
           <span className="">Do not have an account yet?</span>
-          <button className="underline underline-offset-4 text-[#ff3f78]">
+          <button className="underline underline-offset-4 text-folly2">
             Sign Up
           </button>
         </div>

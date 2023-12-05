@@ -7,6 +7,7 @@ export const ChapterCard: React.FC<Chapter & ChapterCardProps> = ({
   pageTo,
   userChapter,
   withProgress = false,
+  onButtonClick,
 }) => {
   return (
     <div className="flex items-center bg-white/10 py-6 px-8 rounded-2xl justify-between">
@@ -21,7 +22,9 @@ export const ChapterCard: React.FC<Chapter & ChapterCardProps> = ({
           {userChapter && (
             <span>Last read: Page {userChapter.lastReadPage}</span>
           )}
-          <Button>{userChapter ? 'Edit Progress' : 'Add Progress'}</Button>
+          <Button onClick={onButtonClick}>
+            {userChapter ? 'Edit Progress' : 'Add Progress'}
+          </Button>
         </div>
       )}
     </div>

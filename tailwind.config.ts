@@ -15,6 +15,7 @@ const config: Config = {
       },
       colors: {
         folly: '#FF165C',
+        folly2: '#FF3F78',
         platinum: '#E5E5E5',
       },
     },

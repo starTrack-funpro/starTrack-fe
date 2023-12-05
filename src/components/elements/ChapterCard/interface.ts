@@ -1,5 +1,6 @@
 export interface ChapterCardProps {
   withProgress?: boolean
+  onButtonClick?: () => void
 }
 
 export type Chapter = {

@@ -5,10 +5,16 @@ import { DashboardSeriesModuleProps } from './interface'
 import { Series } from 'src/components/elements/SeriesCard/interface'
 import { Chapter } from 'src/components/elements/ChapterCard/interface'
 import { Episode } from 'src/components/elements/EpisodeCard/interface'
-import { useApi } from '@hooks'
-import { useAuthContext } from '@contexts'
+import { useApi, useModal } from '@hooks'
 import { AiOutlineLoading } from 'react-icons/ai'
-import { Button, ChapterCard, Chips, EpisodeCard } from '@elements'
+import {
+  Button,
+  ChapterCard,
+  ChapterModal,
+  Chips,
+  EpisodeCard,
+  ProgressModal,
+} from '@elements'
 import Image from 'next/image'
 import { parseDuration } from '@utils'
 
@@ -18,7 +24,9 @@ export const DashboardSeriesModule: React.FC<DashboardSeriesModuleProps> = ({
   const [series, setSeries] = useState<Series>()
   const [chapters, setChapters] = useState<Chapter[]>([])
   const [episodes, setEpisodes] = useState<Episode[]>([])
+  const { isOpen, openModal, closeModal } = useModal()
   const { loading, api } = useApi()
+  const [selectedChapter, setSelectedChapter] = useState<Chapter>()
 
   const chapterMapper = (e: any) => {
     return {
@@ -64,13 +72,14 @@ export const DashboardSeriesModule: React.FC<DashboardSeriesModuleProps> = ({
     }
   }
 
+  const prepareChapterModal = (chapter: Chapter) => {
+    setSelectedChapter(chapter)
+    openModal()
+  }
+
   useEffect(() => {
     fetchSeries()
   }, [])
-
-  useEffect(() => {
-    console.log(episodes)
-  }, [episodes])
 
   return (
     <section className="flex flex-col px-20 py-16 gap-16">
@@ -112,13 +121,34 @@ export const DashboardSeriesModule: React.FC<DashboardSeriesModuleProps> = ({
         )}
         <div className="flex flex-col gap-6">
           {chapters.map((value) => {
-            return <ChapterCard {...value} key={value.no} withProgress />
+            return (
+              <ChapterCard
+                {...value}
+                key={value.no}
+                withProgress
+                onButtonClick={() => prepareChapterModal(value)}
+              />
+            )
           })}
           {episodes.map((value) => {
-            return <EpisodeCard {...value} key={value.no} withProgress />
+            return (
+              <EpisodeCard
+                {...value}
+                key={value.no}
+                withProgress
+                onButtonClick={openModal}
+              />
+            )
           })}
         </div>
       </section>
+      {isOpen && selectedChapter && (
+        <ChapterModal
+          chapter={selectedChapter}
+          close={closeModal}
+          onSave={fetchSeries}
+        />
+      )}
     </section>
   )
 }

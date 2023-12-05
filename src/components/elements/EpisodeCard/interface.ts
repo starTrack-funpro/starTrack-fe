@@ -1,5 +1,6 @@
 export interface EpisodeCardProps {
   withProgress?: boolean
+  onButtonClick?: () => void
 }
 
 export type Episode = {

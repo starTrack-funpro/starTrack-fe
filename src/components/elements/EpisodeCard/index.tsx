@@ -6,6 +6,7 @@ export const EpisodeCard: React.FC<Episode & EpisodeCardProps> = ({
   duration,
   userEpisode,
   withProgress = false,
+  onButtonClick,
 }) => {
   return (
     <div className="flex items-center justify-between bg-white/10 py-6 px-8 rounded-2xl">
@@ -24,7 +25,9 @@ export const EpisodeCard: React.FC<Episode & EpisodeCardProps> = ({
               {userEpisode.lastWatchTime.seconds}
             </span>
           )}
-          <Button>{userEpisode ? 'Edit Progress' : 'Add Progress'}</Button>
+          <Button onClick={onButtonClick}>
+            {userEpisode ? 'Edit Progress' : 'Add Progress'}
+          </Button>
         </div>
       )}
     </div>
