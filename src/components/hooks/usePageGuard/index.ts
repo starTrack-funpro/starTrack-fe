@@ -8,7 +8,6 @@ export const usePageGuard = () => {
   const { isAuthenticated } = useAuthContext()
 
   useEffect(() => {
-    console.log(isAuthenticated)
     if (!isAuthenticated) {
       toast.error('Please login first')
       router.push('/login')

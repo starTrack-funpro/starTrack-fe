@@ -18,6 +18,8 @@ import { Chapter } from 'src/components/elements/ChapterCard/interface'
 import { Episode } from 'src/components/elements/EpisodeCard/interface'
 import { useAuthContext } from '@contexts'
 import { parseDuration } from '@utils'
+import toast from 'react-hot-toast'
+import { useRouter } from 'next/navigation'
 
 export const SeriesDetailModule: React.FC<SeriesDetailModuleProps> = ({
   id,
@@ -28,6 +30,7 @@ export const SeriesDetailModule: React.FC<SeriesDetailModuleProps> = ({
   const { loading, api } = useApi()
   const { isAuthenticated } = useAuthContext()
   const { isOpen, openModal, closeModal } = useModal()
+  const router = useRouter()
 
   const fetchSeries = async () => {
     const { response } = await api.get(`/series/${id}`)
@@ -72,6 +75,18 @@ export const SeriesDetailModule: React.FC<SeriesDetailModuleProps> = ({
     series && fetchChaptersOrEpisodes()
   }, [series])
 
+  const trackSeries = async () => {
+    const { error } = await api.post(`/series/track/${series?.id}`, {})
+
+    if (!error) {
+      toast.success('Successfully track series')
+    } else {
+      toast.error('Series already tracked')
+    }
+
+    router.push(`/dashboard/series/${series?.id}`)
+  }
+
   return (
     <section className="flex flex-col px-20 py-16 gap-16">
       <section className="flex flex-col">
@@ -99,7 +114,9 @@ export const SeriesDetailModule: React.FC<SeriesDetailModuleProps> = ({
               <span className="text-xl">Rated {series.rating}/5</span>
               <p>{series.description}</p>
               {isAuthenticated && (
-                <Button className="w-fit">Track this series</Button>
+                <Button className="w-fit" onClick={trackSeries}>
+                  Track this series
+                </Button>
               )}
             </div>
           </div>
