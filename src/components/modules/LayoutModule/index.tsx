@@ -10,7 +10,6 @@ export const LayoutModule: React.FC<LayoutModuleInterface> = ({ children }) => {
     <div className="flex flex-col">
       <AuthContextProvider>
         <Navbar />
-        {children}
         <Toaster
           toastOptions={{
             success: {
@@ -35,6 +34,7 @@ export const LayoutModule: React.FC<LayoutModuleInterface> = ({ children }) => {
             },
           }}
         />
+        {children}
       </AuthContextProvider>
     </div>
   )

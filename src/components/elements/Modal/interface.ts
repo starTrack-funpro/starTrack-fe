@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-export interface ProgressModalProps {
+export interface ModalProps {
   title?: string
   close: () => void
   onSave: () => void

@@ -1,18 +1,21 @@
 'use client'
 
-import { Radio, SeriesCard } from '@elements'
-import { useApi } from '@hooks'
+import { AddSeriesModal, Button, Radio, SeriesCard } from '@elements'
+import { useApi, useModal } from '@hooks'
 import { useEffect, useState } from 'react'
 import { Series } from 'src/components/elements/SeriesCard/interface'
 import { useDebouncedCallback } from 'use-debounce'
 import { AiOutlineLoading } from 'react-icons/ai'
 import Link from 'next/link'
+import { useAuthContext } from '@contexts'
 
 export const SeriesModule = () => {
   const { api, loading } = useApi()
   const [series, setSeries] = useState<Series[]>([])
   const [searchTitle, setSearchTitle] = useState('')
   const [selectedType, setSelectedType] = useState('')
+  const { role } = useAuthContext()
+  const { isOpen, openModal, closeModal } = useModal()
 
   const fetchSeries = async () => {
     const { response } = await api.get(
@@ -72,13 +75,14 @@ export const SeriesModule = () => {
         </div>
       </section>
       <section className="w-full flex flex-col gap-6">
-        <div className="w-full flex">
+        <div className="w-full flex justify-between">
           <input
             className="w-1/3 py-2 px-4 rounded-xl bg-platinum text-black outline-folly"
             type="text"
             placeholder="Search by title"
             onChange={(e) => debouncedSearch(e.target.value)}
           />
+          {role === 'ADMIN' && <Button onClick={openModal}>Add Series</Button>}
         </div>
         <div className="flex flex-col gap-6">
           {loading && (
@@ -99,6 +103,7 @@ export const SeriesModule = () => {
           )}
         </div>
       </section>
+      {isOpen && <AddSeriesModal close={closeModal} onSave={fetchSeries} />}
     </div>
   )
 }

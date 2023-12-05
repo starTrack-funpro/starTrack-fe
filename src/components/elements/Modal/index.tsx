@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { ProgressModalProps } from './interface'
+import { ModalProps } from './interface'
 import { Button } from '../Button'
 
-export const ProgressModal: React.FC<ProgressModalProps> = ({
+export const ProgressModal: React.FC<ModalProps> = ({
   title,
   close,
   onSave,
@@ -48,3 +48,4 @@ export const ProgressModal: React.FC<ProgressModalProps> = ({
 
 export * from './ChapterModal'
 export * from './EpisodeModal'
+export * from './AddSeriesModal'

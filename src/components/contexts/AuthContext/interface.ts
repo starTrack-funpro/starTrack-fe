@@ -4,6 +4,7 @@ export interface AuthContextProps {
   isAuthenticated: boolean
   name: string
   username: string
+  role: string
   refresh: () => {}
 }
 
