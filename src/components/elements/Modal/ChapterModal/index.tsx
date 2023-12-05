@@ -40,13 +40,15 @@ export const ChapterModal: React.FC<ChapterModalProps> = ({
       return
     }
 
-    if (!Number.isInteger(pageInput)) {
+    const pageInputNum = Number(pageInput)
+
+    if (!Number.isInteger(pageInputNum)) {
       toast.error('Please enter an integer')
       return
     }
 
     const formData = new FormData()
-    formData.append('lastReadPage', pageInput as string)
+    formData.append('lastReadPage', pageInputNum.toString())
     const { response } = chapter.userChapter
       ? await patchData(formData)
       : await postData(formData)
