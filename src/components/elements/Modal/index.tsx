@@ -49,3 +49,4 @@ export const ProgressModal: React.FC<ModalProps> = ({
 export * from './ChapterModal'
 export * from './EpisodeModal'
 export * from './AddSeriesModal'
+export * from './AddChapterModal'

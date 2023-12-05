@@ -4,9 +4,15 @@ import { useEffect, useState } from 'react'
 import { SeriesDetailModuleProps } from './interface'
 import { Series } from 'src/components/elements/SeriesCard/interface'
 import { AiOutlineLoading } from 'react-icons/ai'
-import { useApi } from '@hooks'
+import { useApi, useModal } from '@hooks'
 import Image from 'next/image'
-import { Button, ChapterCard, Chips, EpisodeCard } from '@elements'
+import {
+  AddChapterModal,
+  Button,
+  ChapterCard,
+  Chips,
+  EpisodeCard,
+} from '@elements'
 import { Chapter } from 'src/components/elements/ChapterCard/interface'
 import { Episode } from 'src/components/elements/EpisodeCard/interface'
 import { useAuthContext } from '@contexts'
@@ -20,6 +26,7 @@ export const SeriesDetailModule: React.FC<SeriesDetailModuleProps> = ({
   const [episodes, setEpisodes] = useState<Episode[]>([])
   const { loading, api } = useApi()
   const { isAuthenticated } = useAuthContext()
+  const { isOpen, openModal, closeModal } = useModal()
 
   const fetchSeries = async () => {
     const { response } = await api.get(`/series/${id}`)
@@ -27,6 +34,12 @@ export const SeriesDetailModule: React.FC<SeriesDetailModuleProps> = ({
     if (response) {
       setSeries(response.data)
     }
+  }
+
+  const chapterOrEpisode = () => {
+    return series?.seriesType === 'Comic' || series?.seriesType === 'Novel'
+      ? 'Chapter'
+      : 'Episode'
   }
 
   const parseEpisode = (episode: any) => {
@@ -38,10 +51,7 @@ export const SeriesDetailModule: React.FC<SeriesDetailModuleProps> = ({
   }
 
   const fetchChaptersOrEpisodes = async () => {
-    const type =
-      series?.seriesType === 'Comic' || series?.seriesType === 'Novel'
-        ? 'chapter'
-        : 'episode'
+    const type = chapterOrEpisode().toLowerCase()
 
     const { response } = await api.get(`/series/${id}/${type}`)
 
@@ -96,11 +106,10 @@ export const SeriesDetailModule: React.FC<SeriesDetailModuleProps> = ({
       </section>
       <section className="flex flex-col gap-8">
         {series && (
-          <span className="text-3xl font-semibold">
-            {series.seriesType === 'Comic' || series.seriesType === 'Novel'
-              ? 'Chapters'
-              : 'Episodes'}
-          </span>
+          <div className="flex items-center gap-6">
+            <span className="text-3xl font-semibold">{chapterOrEpisode()}</span>
+            <Button onClick={openModal}>Add {chapterOrEpisode()}</Button>
+          </div>
         )}
         <div className="flex flex-col gap-6">
           {chapters.map((value) => {
@@ -111,6 +120,13 @@ export const SeriesDetailModule: React.FC<SeriesDetailModuleProps> = ({
           })}
         </div>
       </section>
+      {isOpen && series && chapterOrEpisode() === 'Chapter' && (
+        <AddChapterModal
+          seriesId={series.id}
+          close={closeModal}
+          onSave={fetchChaptersOrEpisodes}
+        />
+      )}
     </section>
   )
 }
