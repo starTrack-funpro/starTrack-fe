@@ -38,7 +38,9 @@ export const Navbar = () => {
                 <li className="text-2xl font-semibold">Series</li>
               </Link>
               {isAuthenticated && (
-                <li className="text-2xl font-semibold">Dashboard</li>
+                <Link href="/dashboard">
+                  <li className="text-2xl font-semibold">Dashboard</li>
+                </Link>
               )}
             </ul>
           </nav>
