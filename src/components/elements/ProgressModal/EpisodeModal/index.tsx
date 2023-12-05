@@ -84,6 +84,16 @@ export const EpisodeModal: React.FC<EpisodeModalProps> = ({
       return
     }
 
+    const { hours, minutes, seconds } = durationInput
+    if (
+      !Number.isInteger(hours) ||
+      !Number.isInteger(minutes) ||
+      !Number.isInteger(seconds)
+    ) {
+      toast.error('Please enter an integer')
+      return
+    }
+
     const formData = new FormData()
     formData.append('lastWatchTime', durationToString(durationInput))
     const { response } = episode.userEpisode

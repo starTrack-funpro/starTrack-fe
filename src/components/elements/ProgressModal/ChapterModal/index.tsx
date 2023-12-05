@@ -3,6 +3,7 @@ import { ProgressModal } from '..'
 import { ChapterModalProps } from './interface'
 import { useApi } from '@hooks'
 import toast from 'react-hot-toast'
+import { rangeValidation } from '@utils'
 
 export const ChapterModal: React.FC<ChapterModalProps> = ({
   close,
@@ -16,8 +17,7 @@ export const ChapterModal: React.FC<ChapterModalProps> = ({
   const { api, loading } = useApi()
 
   const rangeValid = () => {
-    const pageInputNum = Number(pageInput)
-    return chapter.pageFrom <= pageInputNum && pageInputNum <= chapter.pageTo
+    return rangeValidation(chapter.pageFrom, Number(pageInput), chapter.pageTo)
   }
 
   const postData = async (data: FormData) => {
@@ -37,6 +37,11 @@ export const ChapterModal: React.FC<ChapterModalProps> = ({
   const saveHandler = async () => {
     if (!rangeValid()) {
       toast.error('Please check your input')
+      return
+    }
+
+    if (!Number.isInteger(pageInput)) {
+      toast.error('Please enter an integer')
       return
     }
 
