@@ -46,7 +46,7 @@ export const Navbar = () => {
           </nav>
 
           {!isAuthenticated && (
-            <div>
+            <div className="flex gap-2">
               <Link href="/login">
                 <Button>Login</Button>
               </Link>

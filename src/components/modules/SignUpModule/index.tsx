@@ -13,7 +13,7 @@ export const SignUpModule = () => {
   const { loading, api } = useApi()
   const router = useRouter()
 
-  const handleLogin = async () => {
+  const handleRegister = async () => {
     if (!inputUsername || !inputPassword || !inputName) {
       toast.error('Please fill all fields')
       return
@@ -69,7 +69,9 @@ export const SignUpModule = () => {
       </div>
 
       <div className="flex flex-col items-center gap-2">
-        <Button>Sign Up</Button>
+        <Button onClick={handleRegister} disabled={loading}>
+          Sign Up
+        </Button>
 
         <div className="flex gap-2">
           <span className="">Already have an account?</span>
