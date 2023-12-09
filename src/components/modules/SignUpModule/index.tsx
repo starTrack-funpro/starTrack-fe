@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@elements'
+import { Button, Input } from '@elements'
 import { useApi } from '@hooks'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -41,27 +41,24 @@ export const SignUpModule = () => {
       <div className="w-1/4 flex flex-col items-center gap-6">
         <div className="flex justify-between gap-6 w-full">
           <span className="text-xl font-semibold">Username</span>
-          <input
+          <Input
             type="text"
-            className="rounded-lg bg-platinum text-black px-2 outline-folly"
             value={inputUsername}
             onChange={(e) => setInputUsername(e.target.value)}
           />
         </div>
         <div className="flex justify-between gap-6 w-full">
           <span className="text-xl font-semibold">Name</span>
-          <input
+          <Input
             type="text"
-            className="rounded-lg bg-platinum text-black px-2 outline-folly"
             value={inputName}
             onChange={(e) => setInputName(e.target.value)}
           />
         </div>
         <div className="flex justify-between gap-6 w-full">
           <span className="text-xl font-semibold">Password</span>
-          <input
+          <Input
             type="password"
-            className="rounded-lg bg-platinum text-black px-2 outline-folly"
             value={inputPassword}
             onChange={(e) => setInputPassword(e.target.value)}
           />

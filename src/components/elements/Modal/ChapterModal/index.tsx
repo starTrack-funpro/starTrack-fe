@@ -4,6 +4,7 @@ import { ChapterModalProps } from './interface'
 import { useApi } from '@hooks'
 import toast from 'react-hot-toast'
 import { rangeValidation } from '@utils'
+import { Input } from '@elements'
 
 export const ChapterModal: React.FC<ChapterModalProps> = ({
   close,
@@ -73,9 +74,8 @@ export const ChapterModal: React.FC<ChapterModalProps> = ({
       <span>{chapter.title}</span>
       <div className="flex gap-2">
         <span>Page</span>
-        <input
+        <Input
           type="number"
-          className="rounded-lg bg-platinum text-black px-2 outline-folly"
           value={pageInput}
           onChange={(e) => setPageInput(e.target.value)}
         />

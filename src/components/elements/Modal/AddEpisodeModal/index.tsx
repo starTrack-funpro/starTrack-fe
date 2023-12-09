@@ -5,6 +5,7 @@ import { durationToString, parseDuration } from '@utils'
 import { useApi } from '@hooks'
 import { ProgressModal } from '..'
 import toast from 'react-hot-toast'
+import { Input } from '@elements'
 
 export const AddEpisodeModal: React.FC<AddEpisodeModalProps> = ({
   seriesId,
@@ -66,36 +67,28 @@ export const AddEpisodeModal: React.FC<AddEpisodeModalProps> = ({
     >
       <div className="flex flex-col gap-2 w-64">
         <span>Title</span>
-        <input
-          type="text"
-          className="rounded-lg bg-platinum text-black px-2 outline-folly"
-          onChange={(e) => setTitle(e.target.value)}
-        />
+        <Input type="text" onChange={(e) => setTitle(e.target.value)} />
         <span>Episode No</span>
-        <input
+        <Input
           type="number"
-          className="rounded-lg bg-platinum text-black px-2 outline-folly"
           onChange={(e) => setEpisodeNo(Number(e.target.value))}
         />
         <span>Duration</span>
         <div className="flex gap-2">
-          <input
+          <Input
             type="number"
-            className="rounded-lg bg-platinum text-black px-2 outline-folly w-16"
             value={durationInput.hours}
             onChange={(e) => setHours(Number(e.target.value))}
           />
           <span>:</span>
-          <input
+          <Input
             type="number"
-            className="rounded-lg bg-platinum text-black px-2 outline-folly w-16"
             value={durationInput.minutes}
             onChange={(e) => setMinutes(Number(e.target.value))}
           />
           <span>:</span>
-          <input
+          <Input
             type="number"
-            className="rounded-lg bg-platinum text-black px-2 outline-folly w-16"
             value={durationInput.seconds}
             onChange={(e) => setSeconds(Number(e.target.value))}
           />

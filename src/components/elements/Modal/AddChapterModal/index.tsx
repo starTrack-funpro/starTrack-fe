@@ -3,6 +3,7 @@ import { ProgressModal } from '..'
 import { AddChapterModalProps } from './interface'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
+import { Input } from '@elements'
 
 export const AddChapterModal: React.FC<AddChapterModalProps> = ({
   seriesId,
@@ -43,28 +44,21 @@ export const AddChapterModal: React.FC<AddChapterModalProps> = ({
     >
       <div className="flex flex-col gap-2 w-64">
         <span>Title</span>
-        <input
-          type="text"
-          className="rounded-lg bg-platinum text-black px-2 outline-folly"
-          onChange={(e) => setTitle(e.target.value)}
-        />
+        <Input type="text" onChange={(e) => setTitle(e.target.value)} />
         <span>Chapter No</span>
-        <input
+        <Input
           type="number"
-          className="rounded-lg bg-platinum text-black px-2 outline-folly"
           onChange={(e) => setChapterNo(Number(e.target.value))}
         />
         <span>Page</span>
         <div className="flex gap-2">
-          <input
+          <Input
             type="number"
-            className="rounded-lg bg-platinum text-black px-2 outline-folly w-20"
             onChange={(e) => setPageFrom(Number(e.target.value))}
           />
           <span>to</span>
-          <input
+          <Input
             type="number"
-            className="rounded-lg bg-platinum text-black px-2 outline-folly w-20"
             onChange={(e) => setPageTo(Number(e.target.value))}
           />
         </div>

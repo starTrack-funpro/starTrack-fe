@@ -5,6 +5,7 @@ import { durationToString, parseDuration, rangeValidation } from '@utils'
 import { Duration } from '../../EpisodeCard/interface'
 import toast from 'react-hot-toast'
 import { ProgressModal } from '..'
+import { Input } from '@elements'
 
 export const EpisodeModal: React.FC<EpisodeModalProps> = ({
   episode,
@@ -120,23 +121,20 @@ export const EpisodeModal: React.FC<EpisodeModalProps> = ({
       <span>{episode.title}</span>
       <div className="flex gap-2">
         <span>Watched</span>
-        <input
+        <Input
           type="number"
-          className="rounded-lg bg-platinum text-black px-2 outline-folly w-16"
           value={durationInput.hours}
           onChange={(e) => setHours(Number(e.target.value))}
         />
         <span>:</span>
-        <input
+        <Input
           type="number"
-          className="rounded-lg bg-platinum text-black px-2 outline-folly w-16"
           value={durationInput.minutes}
           onChange={(e) => setMinutes(Number(e.target.value))}
         />
         <span>:</span>
-        <input
+        <Input
           type="number"
-          className="rounded-lg bg-platinum text-black px-2 outline-folly w-16"
           value={durationInput.seconds}
           onChange={(e) => setSeconds(Number(e.target.value))}
         />

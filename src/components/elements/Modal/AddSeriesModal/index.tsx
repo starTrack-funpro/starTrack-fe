@@ -4,6 +4,7 @@ import { AddSeriesModalProps } from './interface'
 import { rangeValidation } from '@utils'
 import toast from 'react-hot-toast'
 import { useApi } from '@hooks'
+import { Input } from '@elements'
 
 export const AddSeriesModal: React.FC<AddSeriesModalProps> = ({
   close,
@@ -56,11 +57,7 @@ export const AddSeriesModal: React.FC<AddSeriesModalProps> = ({
     >
       <div className="flex flex-col gap-2 w-64">
         <span>Title</span>
-        <input
-          type="text"
-          className="rounded-lg bg-platinum text-black px-2 outline-folly"
-          onChange={(e) => setTitle(e.target.value)}
-        />
+        <Input type="text" onChange={(e) => setTitle(e.target.value)} />
         <span>Type</span>
         <select
           className="rounded-lg bg-platinum text-black px-2 outline-folly"
@@ -72,23 +69,17 @@ export const AddSeriesModal: React.FC<AddSeriesModalProps> = ({
           <option value="Film">Film</option>
         </select>
         <span>Year</span>
-        <input
+        <Input
           type="number"
-          className="rounded-lg bg-platinum text-black px-2 outline-folly"
           onChange={(e) => setYear(Number(e.target.value))}
         />
         <span>Rating</span>
-        <input
+        <Input
           type="number"
-          className="rounded-lg bg-platinum text-black px-2 outline-folly"
           onChange={(e) => setRating(Number(e.target.value))}
         />
         <span>Image URL</span>
-        <input
-          type="text"
-          className="rounded-lg bg-platinum text-black px-2 outline-folly"
-          onChange={(e) => setImageUrl(e.target.value)}
-        />
+        <Input type="text" onChange={(e) => setImageUrl(e.target.value)} />
         <span>Description</span>
         <textarea
           className="rounded-lg bg-platinum text-black px-2 outline-folly"
