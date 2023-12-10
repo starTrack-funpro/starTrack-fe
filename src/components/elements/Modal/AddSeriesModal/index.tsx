@@ -26,14 +26,16 @@ export const AddSeriesModal: React.FC<AddSeriesModalProps> = ({
 
     if (!rangeValidation(0, year, 2023)) {
       toast.error('Year must be in range 0-2023')
+      return
     }
 
     const formData = new FormData()
+
     formData.append('title', title)
     formData.append('year', year.toString())
     formData.append('rating', rating.toString())
     formData.append('description', description)
-    formData.append('seriesType', type)
+    formData.append('type', type)
     formData.append('imageUrl', imageUrl)
 
     const { response } = await api.post('/series', formData)
