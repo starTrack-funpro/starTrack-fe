@@ -54,11 +54,13 @@ export const AddChapterModal: React.FC<AddChapterModalProps> = ({
         <div className="flex gap-2">
           <Input
             type="number"
+            className="w-20"
             onChange={(e) => setPageFrom(Number(e.target.value))}
           />
           <span>to</span>
           <Input
             type="number"
+            className="w-20"
             onChange={(e) => setPageTo(Number(e.target.value))}
           />
         </div>

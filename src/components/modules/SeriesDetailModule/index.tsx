@@ -114,7 +114,11 @@ export const SeriesDetailModule: React.FC<SeriesDetailModuleProps> = ({
               <span className="text-xl">Rated {series.rating}/5</span>
               <p>{series.description}</p>
               {isAuthenticated && (
-                <Button className="w-fit" onClick={trackSeries}>
+                <Button
+                  className="w-fit"
+                  onClick={trackSeries}
+                  disabled={loading}
+                >
                   Track this series
                 </Button>
               )}

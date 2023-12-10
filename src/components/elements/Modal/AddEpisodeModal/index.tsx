@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { AddEpisodeModalProps } from './interface'
 import { Duration } from '../../EpisodeCard/interface'
-import { durationToString, parseDuration } from '@utils'
+import { durationToString, parseDuration, rangeValidation } from '@utils'
 import { useApi } from '@hooks'
 import { ProgressModal } from '..'
 import toast from 'react-hot-toast'
@@ -40,7 +40,30 @@ export const AddEpisodeModal: React.FC<AddEpisodeModalProps> = ({
     })
   }
 
+  const toSeconds = (duration: Duration) => {
+    const { hours, minutes, seconds } = duration
+    return hours * 3600 + minutes * 60 + seconds
+  }
+
+  const rangeValid = () => {
+    const inputDurationSeconds = toSeconds(durationInput)
+    const validSeconds = rangeValidation(0, durationInput.seconds, 59)
+    const validMinutes = rangeValidation(0, durationInput.minutes, 59)
+    const validHours = rangeValidation(
+      0,
+      durationInput.minutes,
+      Number.MAX_VALUE
+    )
+
+    return validSeconds && validMinutes && validHours
+  }
+
   const handleSave = async () => {
+    if (!rangeValid()) {
+      toast.error('Please check your input')
+      return
+    }
+
     const formData = new FormData()
     formData.append('title', title)
     formData.append('no', episodeNo.toString())
@@ -77,22 +100,28 @@ export const AddEpisodeModal: React.FC<AddEpisodeModalProps> = ({
         <div className="flex gap-2">
           <Input
             type="number"
+            className="w-16"
             value={durationInput.hours}
             onChange={(e) => setHours(Number(e.target.value))}
           />
           <span>:</span>
           <Input
             type="number"
+            className="w-16"
             value={durationInput.minutes}
             onChange={(e) => setMinutes(Number(e.target.value))}
           />
           <span>:</span>
           <Input
             type="number"
+            className="w-16"
             value={durationInput.seconds}
             onChange={(e) => setSeconds(Number(e.target.value))}
           />
         </div>
+        {!rangeValid() && (
+          <span className="text-folly2">Invalid duration!</span>
+        )}
       </div>
     </ProgressModal>
   )
