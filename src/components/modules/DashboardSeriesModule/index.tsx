@@ -8,13 +8,11 @@ import { Episode } from 'src/components/elements/EpisodeCard/interface'
 import { useApi, useModal } from '@hooks'
 import { AiOutlineLoading } from 'react-icons/ai'
 import {
-  Button,
   ChapterCard,
   ChapterModal,
   Chips,
   EpisodeCard,
   EpisodeModal,
-  ProgressModal,
 } from '@elements'
 import Image from 'next/image'
 import { parseDuration } from '@utils'
@@ -47,6 +45,8 @@ export const DashboardSeriesModule: React.FC<DashboardSeriesModuleProps> = ({
   const fetchSeries = async () => {
     const { response } = await api.get(`/series/track/${id}`)
 
+    console.log(response)
+
     if (response) {
       setSeries(response.data.series)
       const seriesType = response.data.series.seriesType
@@ -67,6 +67,7 @@ export const DashboardSeriesModule: React.FC<DashboardSeriesModuleProps> = ({
   }
 
   const parseUserEpisode = (userEpisode: any) => {
+    if (!userEpisode) return null
     const { lastWatchTime, ...rest } = userEpisode
     return {
       lastWatchTime: parseDuration(lastWatchTime),
