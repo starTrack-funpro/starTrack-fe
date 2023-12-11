@@ -3,6 +3,7 @@
 import { useAuthContext } from '@contexts'
 import { Button, Input } from '@elements'
 import { useApi } from '@hooks'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
@@ -70,9 +71,11 @@ export const LoginModule = () => {
 
         <div className="flex gap-2">
           <span className="">Do not have an account yet?</span>
-          <button className="underline underline-offset-4 text-folly2">
-            Sign Up
-          </button>
+          <Link href="/signup">
+            <button className="underline underline-offset-4 text-folly2">
+              Sign Up
+            </button>
+          </Link>
         </div>
       </div>
     </div>
