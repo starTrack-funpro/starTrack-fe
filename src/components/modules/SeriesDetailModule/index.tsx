@@ -28,7 +28,7 @@ export const SeriesDetailModule: React.FC<SeriesDetailModuleProps> = ({
   const [chapters, setChapters] = useState<Chapter[]>([])
   const [episodes, setEpisodes] = useState<Episode[]>([])
   const { loading, api } = useApi()
-  const { isAuthenticated } = useAuthContext()
+  const { isAuthenticated, role } = useAuthContext()
   const { isOpen, openModal, closeModal } = useModal()
   const router = useRouter()
 
@@ -130,7 +130,9 @@ export const SeriesDetailModule: React.FC<SeriesDetailModuleProps> = ({
         {series && (
           <div className="flex items-center gap-6">
             <span className="text-3xl font-semibold">{chapterOrEpisode()}</span>
-            <Button onClick={openModal}>Add {chapterOrEpisode()}</Button>
+            {isAuthenticated && role === 'ADMIN' && (
+              <Button onClick={openModal}>Add {chapterOrEpisode()}</Button>
+            )}
           </div>
         )}
         <div className="flex flex-col gap-6">
